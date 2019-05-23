@@ -4,26 +4,43 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
 
 // Serializable - dados pode ser convertidos em bytes, gravados em arquivos, trafego em rede.
 // 1L = versao 1 . 
 //@Entity, @Id... é JPA para mapeamento objeto relacional
 
-//@Entity
+@Entity
 public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	//@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//GenerationType - tipo de geracao de chave primaria.
+	@Id	
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	
-	// Cada Categoria deve possuir varios produtos
+	//RELACIONAMENTO ENTRE CATEGORIA E PRODUTO. (N CATEGORIA PODE TER M PRODUTOS)
+	// N Categoria deve possuir varios N (list ) de produtos
 	//produtos - nome do papel da associacao.
-	//public List<ProdutoAntigo> produtos =  new ArrayList<>();
+	@ManyToMany(mappedBy="categorias")
+	public List<Produtos> produtos =  new ArrayList<>();
 	
 	
+	public List<Produtos> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produtos> produtos) {
+		this.produtos = produtos;
+	}
+
 	public Categoria() {
 		
 	}

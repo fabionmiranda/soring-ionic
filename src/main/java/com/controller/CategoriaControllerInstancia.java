@@ -1,4 +1,4 @@
-package com.controller;
+/* package com.controller;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,3 +32,4 @@ public class CategoriaControllerInstancia {
 	
 	
 	}	
+*/
