@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class Produtos implements Serializable {
 	
@@ -27,12 +28,14 @@ public class Produtos implements Serializable {
 	//@ManyToMany e JoinTable - definir a "TERCEIRA" tabela (PRODUTO_CATEGORIA) para fazer o join table.
 	//JoinColunm - nome da chave estrangeira.
 	//JoinTable - criar 3a. tabela com join.
+	//@JsonBackReference - omite a lista de produtos.
+	
+	@JsonBackReference
 	@ManyToMany()
 	@JoinTable(name="PRODUTO_CATEGORIA",
 		joinColumns = @JoinColumn(name="produtos_id"), //chave estrang. do produto.
 		inverseJoinColumns = @JoinColumn(name="categoria_id") // chave estrang. categ.
-	)
-		
+	)		
 	public List<Categoria> categorias =  new ArrayList<>();
 
 	public Integer getId() {
@@ -67,6 +70,9 @@ public class Produtos implements Serializable {
 		this.categorias = categorias;
 	}
 
+	public Produtos ( ) {
+		
+	}
 	public Produtos(Integer id, String nome, Double preco) {
 		super();
 		this.id = id;

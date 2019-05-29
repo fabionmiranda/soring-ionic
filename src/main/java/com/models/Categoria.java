@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 // Serializable - dados pode ser convertidos em bytes, gravados em arquivos, trafego em rede.
 // 1L = versao 1 . 
@@ -29,6 +31,9 @@ public class Categoria implements Serializable {
 	//RELACIONAMENTO ENTRE CATEGORIA E PRODUTO. (N CATEGORIA PODE TER M PRODUTOS)
 	// N Categoria deve possuir varios N (list ) de produtos
 	//produtos - nome do papel da associacao.
+	//JsonManagedReference - referencia gerenciada pelo json - jackson.
+	
+	@JsonManagedReference
 	@ManyToMany(mappedBy="categorias")
 	public List<Produtos> produtos =  new ArrayList<>();
 	
