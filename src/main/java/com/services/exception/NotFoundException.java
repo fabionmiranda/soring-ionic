@@ -10,7 +10,7 @@ public class NotFoundException extends RuntimeException {
 		// TODO Auto-generated constructor stub
 	}
 
-	public NotFoundException(Throwable cause) {
+	public NotFoundException(String message, Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}

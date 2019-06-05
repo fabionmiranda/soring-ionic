@@ -2,9 +2,12 @@ package com.controller.exception;
 
 import java.io.Serializable;
 
+import org.springframework.http.HttpStatus;
+
 public class ErroPadrao  implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	
 	private Integer status;
 	private String mensagem;
 	private Long instanteErro;
@@ -26,9 +29,9 @@ public class ErroPadrao  implements Serializable {
 	public void setInstanteErro(Long instanteErro) {
 		this.instanteErro = instanteErro;
 	}
-	public ErroPadrao(Integer status, String mensagem, Long instanteErro) {
+	public ErroPadrao(int i, String mensagem, Long instanteErro) {
 		super();
-		this.status = status;
+		this.status = i;
 		this.mensagem = mensagem;
 		this.instanteErro = instanteErro;
 	}

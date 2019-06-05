@@ -19,13 +19,11 @@ public class CategoriaService {
 	private CategoriaRepository categoriaRepository;	
 	
 	//buscar categoria por id
-	public Categoria buscarPorId(Integer id) throws NotFoundException {
-		Categoria objeto = categoriaRepository.findOne(id);	
+	public Categoria buscarPorId(Integer id) throws Exception   {
+		Categoria objeto = categoriaRepository.findOne(id); // se o id não existe ele retorna null.	
 		//tratamento objeto = null então há excessao
 		if (objeto == null) {
-			throw new NotFoundException("Objeto não encontrado Id :" 
-					+ id 
-					+ "Tipo" + Categoria.class.getName());
+			throw new NotFoundException("Objeto não encontrado Id :" + id + "Tipo" + Categoria.class.getName());
 		}
 	return objeto;
 		

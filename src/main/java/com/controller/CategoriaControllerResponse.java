@@ -23,7 +23,7 @@ public class CategoriaControllerResponse {
 	// ResponseEntity - retorna encapsulado resposta HTTP tipo REST.
 	
 	@RequestMapping(value="/{id}",  method=RequestMethod.GET)
-	public ResponseEntity<?> listar(@PathVariable Integer id) {
+	public ResponseEntity<?> listar(@PathVariable Integer id) throws Exception {
 			Categoria objeto = categoriaService.buscarPorId(id);
 			
 	return ResponseEntity.ok(objeto);		
