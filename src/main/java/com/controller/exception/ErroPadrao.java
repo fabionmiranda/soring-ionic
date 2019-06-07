@@ -2,8 +2,6 @@ package com.controller.exception;
 
 import java.io.Serializable;
 
-import org.springframework.http.HttpStatus;
-
 public class ErroPadrao  implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
