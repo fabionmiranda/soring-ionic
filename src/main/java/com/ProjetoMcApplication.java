@@ -7,12 +7,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.enums.TipoCliente;
 import com.models.Categoria;
 import com.models.Cidade;
+import com.models.Cliente;
+import com.models.Endereco;
 import com.models.Estado;
 import com.models.Produtos;
 import com.repository.CategoriaRepository;
 import com.repository.CidadeRepository;
+import com.repository.ClienteRepository;
+import com.repository.EnderecoRepository;
 import com.repository.EstadoRepository;
 import com.repository.ProdutoRepository;
 
@@ -32,6 +37,12 @@ public class ProjetoMcApplication implements CommandLineRunner{
 	
 	@Autowired
 	private EstadoRepository estadoRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -83,6 +94,17 @@ public class ProjetoMcApplication implements CommandLineRunner{
 		estadoRepository.save(Arrays.asList(estado1, estado2));
 		cidadeRepository.save(Arrays.asList(cidade1, cidade2, cidade3));
 		
+		
+		Cliente cli1 = new Cliente(null, "Maria", "maria@gmail.com", "9999-9999", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("1111111111", "2222222222"));
+		
+		Endereco e1 = new Endereco(null, "Rua 1", "10", "Apto 10", "jardim", "4444-4444", cli1, cidade1);
+		Endereco e2 = new Endereco(null, "Rua 2", "20", "Apto 20", "jardim", "5555-5555", cli1, cidade2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		clienteRepository.save(Arrays.asList(cli1));
+		enderecoRepository.save(Arrays.asList(e1, e2));
 		
 	}
 	

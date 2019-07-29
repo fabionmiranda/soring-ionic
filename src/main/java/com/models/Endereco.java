@@ -2,9 +2,22 @@ package com.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+@Entity
 public class Endereco  implements Serializable{	
 	
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String logradouro;
 	private String numero;
@@ -13,8 +26,19 @@ public class Endereco  implements Serializable{
 	private String cep;
 	
 	// no Diagrama Classe respeitando os papeis. cliente
+	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
+	
+	@ManyToOne
+	@JoinColumn(name="cidade_id")
 	private Cidade cidade;
+	
+	public Endereco() {
+		
+	}
 	
 	@Override
 	public int hashCode() {
@@ -40,10 +64,7 @@ public class Endereco  implements Serializable{
 			return false;
 		return true;
 	}
-
-	private Endereco() {
-		
-	}
+	
 
 	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
 			Cliente cliente, Cidade cidade) {
@@ -55,6 +76,7 @@ public class Endereco  implements Serializable{
 		this.bairro = bairro;
 		this.cep = cep;
 		this.cliente = cliente;
+		this.cidade = cidade;
 	}
 
 	public Integer getId() {
