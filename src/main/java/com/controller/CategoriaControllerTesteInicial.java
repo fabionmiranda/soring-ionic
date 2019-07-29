@@ -12,7 +12,7 @@ public class CategoriaControllerTesteInicial {
 	@RequestMapping(method=RequestMethod.GET)
 	public String listar() {
 	
-	return "ok...";
+		return "ok...";
 	}
 }
 */
