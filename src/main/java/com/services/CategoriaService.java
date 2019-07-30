@@ -1,6 +1,5 @@
 package com.services;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +29,13 @@ public class CategoriaService {
 	}
 	
 	public Categoria inserirCategorias (Categoria obj) {
+		obj.setId(null); // define como nulo para inserir
 		return categoriaRepository.save(obj);
 	}
+	
+	public Categoria atualizarCategorias (Categoria obj) {
+		return categoriaRepository.save(obj);
+	}
+	
 
 }

@@ -39,7 +39,7 @@ public class CategoriaControllerResponse {
 	// @RequestBody - json ser convertido para objeto body automaticamente
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody Categoria obj) {
+	public ResponseEntity<Categoria> insert(@Valid @RequestBody Categoria obj) {
 		// Categoria obj = categoriaService.fromDTO(objDto);
 		obj = categoriaService.inserirCategorias(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -47,6 +47,15 @@ public class CategoriaControllerResponse {
 		return ResponseEntity.created(uri).build();
 	}
 	
+
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody Categoria obj, @PathVariable Integer id) {
+
+		obj = categoriaService.atualizarCategorias(obj);
+		obj.setId(id);
+		
+		return ResponseEntity.noContent().build();
+	}
 	
 	
 }
