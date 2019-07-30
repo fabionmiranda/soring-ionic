@@ -28,5 +28,9 @@ public class CategoriaService {
 	return objeto;
 		
 	}
+	
+	public Categoria inserirCategorias (Categoria obj) {
+		return categoriaRepository.save(obj);
+	}
 
 }

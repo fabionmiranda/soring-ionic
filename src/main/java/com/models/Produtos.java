@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Produtos implements Serializable {
 	
@@ -30,7 +30,7 @@ public class Produtos implements Serializable {
 	//JoinTable - criar 3a. tabela com join.
 	//@JsonBackReference - omite a lista de produtos.
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany()
 	@JoinTable(name="PRODUTO_CATEGORIA",
 		joinColumns = @JoinColumn(name="produtos_id"), //chave estrang. do produto.
