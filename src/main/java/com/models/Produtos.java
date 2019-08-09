@@ -2,7 +2,9 @@ package com.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,6 +39,9 @@ public class Produtos implements Serializable {
 		inverseJoinColumns = @JoinColumn(name="categoria_id") // chave estrang. categ.
 	)		
 	public List<Categoria> categorias =  new ArrayList<>();
+	
+	// classe Pedido precisa conhecer os ItemPedido = itens = itens de pedido.
+	private Set<ItemPedido> itens = new HashSet<>();
 
 	public Integer getId() {
 		return id;

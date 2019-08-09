@@ -136,10 +136,8 @@ public class ProjetoMcApplication implements CommandLineRunner{
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 		
 		// salva primeiro o pedido depois os pagamentos dos pedidos
-		pedidoRepository.save(Arrays.asList(ped1, ped2));
-		
-		
-		
+		pedidoRepository.save(Arrays.asList(ped1, ped2));	
+				
 	}
 	
 

@@ -2,6 +2,8 @@ package com.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -32,6 +34,9 @@ public class Pedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega; // pedido tem endereco de entrega
+	
+	// classe Pedido precisa conhecer os ItemPedido = itens = itens de pedido.
+	private Set<ItemPedido> itens = new HashSet<>();
 	
 	public Pedido() {
 		
