@@ -2,8 +2,11 @@ package com.models;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+
 import com.enums.EstadoPagamento;
 
+@Entity
 public class PagamentoComBoleto extends Pagamento {
 	
 	private static final long serialVersionUID = 1L;

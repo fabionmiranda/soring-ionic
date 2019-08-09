@@ -35,7 +35,6 @@ public class CategoriaService {
 	
 	public Categoria atualizarCategorias (Categoria obj) {
 		return categoriaRepository.save(obj);
-	}
-	
+	}	
 
 }

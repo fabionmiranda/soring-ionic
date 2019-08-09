@@ -1,5 +1,6 @@
 package com;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,18 +8,25 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.enums.EstadoPagamento;
 import com.enums.TipoCliente;
 import com.models.Categoria;
 import com.models.Cidade;
 import com.models.Cliente;
 import com.models.Endereco;
 import com.models.Estado;
+import com.models.Pagamento;
+import com.models.PagamentoComBoleto;
+import com.models.PagamentoComCartao;
+import com.models.Pedido;
 import com.models.Produtos;
 import com.repository.CategoriaRepository;
 import com.repository.CidadeRepository;
 import com.repository.ClienteRepository;
 import com.repository.EnderecoRepository;
 import com.repository.EstadoRepository;
+import com.repository.PagamentoRepository;
+import com.repository.PedidoRepository;
 import com.repository.ProdutoRepository;
 
 
@@ -43,6 +51,12 @@ public class ProjetoMcApplication implements CommandLineRunner{
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -105,6 +119,26 @@ public class ProjetoMcApplication implements CommandLineRunner{
 		
 		clienteRepository.save(Arrays.asList(cli1));
 		enderecoRepository.save(Arrays.asList(e1, e2));
+		
+		// mascara 
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+		
+		Pedido ped1 = new Pedido(null, sdf.parse("09/08/2019 11:00"), cli1, e1);
+		Pedido ped2 = new Pedido(null, sdf.parse("10/08/2019 12:00"), cli1, e2);
+		
+		// 6 - parcelas
+		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		ped1.setPagamento(pagto1);
+		
+		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/08/2019 00:00"), null);
+		ped2.setPagamento(pagto2);
+		
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		
+		// salva primeiro o pedido depois os pagamentos dos pedidos
+		pedidoRepository.save(Arrays.asList(ped1, ped2));
+		
+		
 		
 	}
 	

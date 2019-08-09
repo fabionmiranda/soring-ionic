@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -31,7 +33,7 @@ public class Cliente implements Serializable{
 	private Integer tipo;
 	
 
-	@OneToMany(mappedBy="cliente")
+	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	//conjunto de telefones com strings
@@ -39,7 +41,9 @@ public class Cliente implements Serializable{
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
-	//associacao - pedido tem que conhecer seus clientes - lista	
+	//associacao - pedido tem que conhecer seus clientes - lista
+	@JsonIgnore
+	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente() {

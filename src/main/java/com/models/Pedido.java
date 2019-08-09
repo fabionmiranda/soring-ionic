@@ -3,27 +3,44 @@ package com.models;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private Date instante;
 	
-	private Pagamento pagamento; // assoaicao: 1 pedido tem 1 pagamento
+	// para salvar o pedido com o pagamento, mappedby - mapeado do outro lado.
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido") 
+	private Pagamento pagamento; // associacao: 1 pedido tem 1 pagamento
 	
+	@ManyToOne
+	@JoinColumn(name="cliente_id")
 	private Cliente cliente; // pedido tem 1 cliente
 	
+	@ManyToOne
+	@JoinColumn(name="endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega; // pedido tem endereco de entrega
 	
 	public Pedido() {
 		
 	}
 
-	public Pedido(Integer id, Date instante, Pagamento pagamento, Cliente cliente, Endereco enderecoDeEntrega) {
+	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
 		super();
 		this.id = id;
-		this.instante = instante;
-		this.pagamento = pagamento;
+		this.instante = instante;		
 		this.cliente = cliente;
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
